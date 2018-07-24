@@ -3,22 +3,25 @@ BOLD   = "1"
 FAINT  = "2"
 ITALIC = "3"
 UNDERLINE = "4"
-SLOW_BLINK  = "5"
-RAPID_BLINK = "6"
-REVERSE= "7"
+SLOWBLINK  = "5"
+RAPIDBLINK = "6"
+REVERSE = "7"
+STRIKE = "9"
 
-
-BLACK = "\033[1;30m"
-RED   = "\033[1;31m"  
-GREEN = "\033[0;32m"
-YELLOW ="\033[0;33m"
-BLUE  = "\033[1;34m"
-MAGENTA = "\033[0;35m"
-CYAN  = "\033[1;36m"
-WHITE = "\033[0;37m"
+BLACK = "30m"
+RED   = "31m"  
+GREEN = "32m"
+YELLOW ="33m"
+BLUE  = "34m"
+MAGENTA = "35m"
+CYAN  = "36m"
+WHITE = "37m"
 RESET = "\033[0;0m"
-
+REVERSE_RESET = "27"
 
 def colorPrint(rounerString, rounerColour, rounerEffects):
-    rounerString = "\033" + rounerEffects + rounerColour + rounerString + RESET
+    rounerString = rounerColour + rounerString
+    for effect in rounerEffects:
+        rounerString = effect + ";" + rounerString
+    rounerString = "\033[" + rounerString + RESET
     return rounerString
