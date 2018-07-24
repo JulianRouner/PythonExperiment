@@ -1,4 +1,5 @@
 from time import sleep
+from rounerColors import *
 import sys
 
 myInput = input("Enter a phrase: ")
@@ -12,5 +13,5 @@ def slowPrint(slowPrintString, slowPrintTime):
         else:
             sleep(slowPrintTime)
     print()
-    
-slowPrint(myInput, 0.06)
+
+    slowPrint(colorPrint(myInput, RED), 0.06)
