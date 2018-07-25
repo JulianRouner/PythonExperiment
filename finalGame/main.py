@@ -14,6 +14,7 @@ mainPlayer = protag.Player(20, [0], [shield, laserGun, gun], 0)
 mainEnemy  = enemy.Enemy("Robot", 15, [shield, laserGun, gun], 0, [0])
 
 battleOption = input("Would you like to: \n a) Shoot a laser \n b) Raise your shield \n c) Shoot a gun") 
+enemyBattleOption = randint(1,3)
 
 if battleOption == "a":
     mainPlayer.equipHand(laserGun)
@@ -24,6 +25,15 @@ elif battleOption == "b":
 elif battleOption == "c":
     mainPlayer.equipHand(gun)
 
+if enemyBattleOption == 1:
+    mainEnemy.equipHand(laserGun)
+    print("Enemy shot a laser.")
+elif enemyBattleOption == 2:
+    mainEnemy.equipHand(shield)
+    print("Enemy raised shields.")
+elif enemyBattleOption == 3:
+    mainEnemy.equipHand(gun)
+    print("Enemy shot a gun.")
 mainEnemy.fightPlayer(mainPlayer)
 mainPlayer.fightEnemy(mainEnemy)
 

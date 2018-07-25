@@ -11,3 +11,6 @@ class Enemy:
     def fightPlayer(self, playerName):
         if playerName.activeWeapon.weaponType == "1" and self.activeWeapon.weaponType == "3" or playerName.activeWeapon.weaponType == "2" and self.activeWeapon.weaponType == "1" or playerName.activeWeapon.weaponType == "1" and self.activeWeapon.weaponType == "2":
             playerName.health = playerName.health - self.activeWeapon.damage 
+    def equipHand(self, weaponName):
+        self.activeWeapon = weaponName
+        self.inventory.remove(weaponName)
