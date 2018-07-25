@@ -10,11 +10,21 @@ shield   = weapon.Weapon("Shield", 10, 1)
 laserGun = weapon.Weapon("Laser gun", 10, 2)
 gun      = weapon.Weapon("Gun", 10, 3)
 
-mainPlayer = protag.Player(20, [0], [shield, laserGun, gun], 0)
-mainEnemy  = enemy.Enemy("Robot", 15, [shield, laserGun, gun], 0, [0])
+mainPlayer = protag.Player(20, [0], [0], 0)
+mainEnemy  = enemy.Enemy("Robot", 15, [0], 0, [0])
 
-battleOption = input("Would you like to: \n a) Shoot a laser \n b) Raise your shield \n c) Shoot a gun") 
-enemyBattleOption = randint(1,3)
+
+mainPlayer.inventory.append(gun)
+mainPlayer.inventory.append(laserGun)
+mainPlayer.inventory.append(shield)
+
+mainEnemy.inventory.append(gun)
+mainEnemy.inventory.append(laserGun)
+mainEnemy.inventory.append(shield)
+
+
+battleOption = input("Would you like to: \n a) Shoot a laser \n b) Raise your shield \n c) Shoot a gun \n") 
+enemyBattleOption = randint(1, 3)
 
 if battleOption == "a":
     mainPlayer.equipHand(laserGun)
@@ -34,12 +44,13 @@ elif enemyBattleOption == 2:
 elif enemyBattleOption == 3:
     mainEnemy.equipHand(gun)
     print("Enemy shot a gun.")
-mainEnemy.fightPlayer(mainPlayer)
+    
 mainPlayer.fightEnemy(mainEnemy)
+mainEnemy.fightPlayer(mainPlayer)
 
-print("Player dealt " + str(mainPlayer.activeWeapon.damage) + " damage.")
+#print("Player dealt " + str(mainPlayer.activeWeapon.damage) + " damage.")
 print("Enemy now has " + str(mainEnemy.health) + " health.")
-print(mainEnemy.name + " dealt " + str(mainEnemy.activeWeapon.damage) + " damage.")
+#print(mainEnemy.name + " dealt " + str(mainEnemy.activeWeapon.damage) + " damage.")
 print("Player now has " + str(mainPlayer.health) + " health.")
 
 #print(battle())
