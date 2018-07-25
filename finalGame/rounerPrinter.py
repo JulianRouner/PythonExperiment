@@ -29,7 +29,7 @@ def colorPrint(rounerString, rounerColour, rounerEffects):
     rounerString = "\033[" + rounerString + RESET
     return rounerString
     
-#myInput = input("Enter a phrase: ")
+myInput = input("Enter a phrase: ")
 
 def slowPrint(slowPrintString, slowPrintTime):
     for c in slowPrintString:
