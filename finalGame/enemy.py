@@ -1,4 +1,5 @@
 #import rounerPrinter
+#1 = Gun; 2 = shield, 3 = laser
 
 class Enemy:
     def __init__(self, name, health, inventory, activeWeapon, activeArmor):
@@ -8,4 +9,5 @@ class Enemy:
         self.activeWeapon = activeWeapon
         self.activeArmor = activeArmor
     def fightPlayer(self, playerName):
-        playerName.health = playerName.health - self.activeWeapon.damage 
+        if playerName.activeWeapon.weaponType == "1" and self.activeWeapon.weaponType == "3" or playerName.activeWeapon.weaponType == "2" and self.activeWeapon.weaponType == "1" or playerName.activeWeapon.weaponType == "1" and self.activeWeapon.weaponType == "2":
+            playerName.health = playerName.health - self.activeWeapon.damage 
