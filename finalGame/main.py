@@ -10,8 +10,8 @@ shield   = weapon.Weapon("Shield", 10, 1)
 laserGun = weapon.Weapon("Laser gun", 10, 2)
 gun      = weapon.Weapon("Gun", 10, 3)
 
-mainPlayer = protag.Player(20, [0], [0], 0)
-mainEnemy  = enemy.Enemy("Robot", 15, [0], 0, [0])
+mainPlayer = protag.Player(20, [0], weapon.Weapon("Default Weapon", 0, 0), 0)
+mainEnemy  = enemy.Enemy("Robot", 15, [0], weapon.Weapon("Default Weapon", 0, 0), [0])
 
 
 mainPlayer.inventory.append(gun)
@@ -34,6 +34,9 @@ elif battleOption == "b":
     print("Player raised shields.")
 elif battleOption == "c":
     mainPlayer.equipHand(gun)
+    print("Player shot a gun.")
+
+print("Player used " + mainPlayer.activeWeapon.name)
 
 if enemyBattleOption == 1:
     mainEnemy.equipHand(laserGun)
@@ -45,12 +48,20 @@ elif enemyBattleOption == 3:
     mainEnemy.equipHand(gun)
     print("Enemy shot a gun.")
     
-mainPlayer.fightEnemy(mainEnemy)
-mainEnemy.fightPlayer(mainPlayer)
+print("Enemy used " + mainEnemy.activeWeapon.name)    
+    
+if mainPlayer.fightEnemy(mainEnemy) == 1 and mainEnemy.fightEnemy(mainPlayer) == 0:
+    mainEnemy.health -= mainPlayer.activeWeapon.damage
+elif mainPlayer.fightEnemy(mainEnemy) == 0 and mainEnemy.fightEnemy(mainPlayer) == 1:
+    mainPlayer.health -= mainEnemy.activeWeapon.damage
+else:
+    print("sYnTAx ErROr!")
+#            enemyName.health -= self.activeWeapon.damage
+
 
 #print("Player dealt " + str(mainPlayer.activeWeapon.damage) + " damage.")
 print("Enemy now has " + str(mainEnemy.health) + " health.")
 #print(mainEnemy.name + " dealt " + str(mainEnemy.activeWeapon.damage) + " damage.")
 print("Player now has " + str(mainPlayer.health) + " health.")
 
-#print(battle())
+#print(battle()) 
