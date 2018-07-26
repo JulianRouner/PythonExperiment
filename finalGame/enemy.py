@@ -11,9 +11,9 @@ class Enemy:
         
     def fightEnemy(self, enemyName):
         if self.activeWeapon.weaponType == 1 and enemyName.activeWeapon.weaponType == 2 or self.activeWeapon.weaponType == 2 and enemyName.activeWeapon.weaponType == 3 or self.activeWeapon.weaponType == 3 and enemyName.activeWeapon.weaponType == 1:
-            return 1
+            return True
         else:
-            return 0
+            return False
     def equipHand(self, weaponName):
         self.activeWeapon = weaponName
         self.inventory.remove(weaponName)
