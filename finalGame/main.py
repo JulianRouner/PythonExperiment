@@ -36,8 +36,6 @@ elif battleOption == "c":
     mainPlayer.equipHand(gun)
     print("Player shot a gun.")
 
-print("Player used " + mainPlayer.activeWeapon.name)
-
 if enemyBattleOption == 1:
     mainEnemy.equipHand(laserGun)
     print("Enemy shot a laser.")
@@ -48,14 +46,12 @@ elif enemyBattleOption == 3:
     mainEnemy.equipHand(gun)
     print("Enemy shot a gun.")
     
-print("Enemy used " + mainEnemy.activeWeapon.name)    
-    
 if mainPlayer.fightEnemy(mainEnemy) == 1 and mainEnemy.fightEnemy(mainPlayer) == 0:
     mainEnemy.health -= mainPlayer.activeWeapon.damage
 elif mainPlayer.fightEnemy(mainEnemy) == 0 and mainEnemy.fightEnemy(mainPlayer) == 1:
     mainPlayer.health -= mainEnemy.activeWeapon.damage
 else:
-    print("sYnTAx ErROr!")
+    print("You used the same weapon. No damage was dealt.")
 #            enemyName.health -= self.activeWeapon.damage
 
 
