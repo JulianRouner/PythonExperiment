@@ -19,3 +19,6 @@ class Player:
         self.activeWeapon = weaponName
         self.inventory.remove(weaponName)
         return self.activeWeapon
+    def putAway(self):
+        self.inventory.append(self.activeWeapon)
+        self.activeWeapon = Weapon("Default Weapon", 0, 0)

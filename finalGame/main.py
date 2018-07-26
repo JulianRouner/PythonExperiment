@@ -22,42 +22,50 @@ mainEnemy.inventory.append(gun)
 mainEnemy.inventory.append(laserGun)
 mainEnemy.inventory.append(shield)
 
-
-battleOption = input("Would you like to: \n a) Shoot a laser \n b) Raise your shield \n c) Shoot a gun \n") 
-enemyBattleOption = randint(1, 3)
-
-if battleOption == "a":
-    mainPlayer.equipHand(laserGun)
-    print("Player shot a laser.")
-elif battleOption == "b":
-    mainPlayer.equipHand(shield)
-    print("Player raised shields.")
-elif battleOption == "c":
-    mainPlayer.equipHand(gun)
-    print("Player shot a gun.")
-
-if enemyBattleOption == 1:
-    mainEnemy.equipHand(laserGun)
-    print("Enemy shot a laser.")
-elif enemyBattleOption == 2:
-    mainEnemy.equipHand(shield)
-    print("Enemy raised shields.")
-elif enemyBattleOption == 3:
-    mainEnemy.equipHand(gun)
-    print("Enemy shot a gun.")
+def chooseWeapons():
+    battleOption = input("Would you like to: \n a) Shoot a laser \n b) Raise your shield \n c) Shoot a gun \n") 
+    enemyBattleOption = randint(1, 3)
     
-if mainPlayer.fightEnemy(mainEnemy) == 1 and mainEnemy.fightEnemy(mainPlayer) == 0:
-    mainEnemy.health -= mainPlayer.activeWeapon.damage
-elif mainPlayer.fightEnemy(mainEnemy) == 0 and mainEnemy.fightEnemy(mainPlayer) == 1:
-    mainPlayer.health -= mainEnemy.activeWeapon.damage
-else:
-    print("You used the same weapon. No damage was dealt.")
-#            enemyName.health -= self.activeWeapon.damage
-
+    if battleOption == "a":
+        mainPlayer.equipHand(laserGun)
+        print("Player shot a laser.")
+    elif battleOption == "b":
+        mainPlayer.equipHand(shield)
+        print("Player raised shields.")
+    elif battleOption == "c":
+        mainPlayer.equipHand(gun)
+        print("Player shot a gun.")
+    
+    if enemyBattleOption == 1:
+        mainEnemy.equipHand(laserGun)
+        print("Enemy shot a laser.")
+    elif enemyBattleOption == 2:
+        mainEnemy.equipHand(shield)
+        print("Enemy raised shields.")
+    elif enemyBattleOption == 3:
+        mainEnemy.equipHand(gun)
+        print("Enemy shot a gun.")
+        
+chooseWeapons()
+    
+while mainPlayer.health > 0 or mainEnemy.health > 0:
+    if mainPlayer.fightEnemy(mainEnemy) == 1 and mainEnemy.fightEnemy(mainPlayer) == 0:
+        mainEnemy.health -= mainPlayer.activeWeapon.damage
+    elif mainPlayer.fightEnemy(mainEnemy) == 0 and mainEnemy.fightEnemy(mainPlayer) == 1:
+        mainPlayer.health -= mainEnemy.activeWeapon.damage
+    else:
+        print("You used the same weapon. No damage was dealt.")
+    
+    #print("Player dealt " + str(mainPlayer.activeWeapon.damage) + " damage.")
+    print("Enemy now has " + str(mainEnemy.health) + " health.")
+    #print(mainEnemy.name + " dealt " + str(mainEnemy.activeWeapon.damage) + " damage.")
+    print("Player now has " + str(mainPlayer.health) + " health.")
+    
+    mainEnemy.putAway()
+    mainPlayer.putAway()
+    chooseWeapons()
 
 #print("Player dealt " + str(mainPlayer.activeWeapon.damage) + " damage.")
-print("Enemy now has " + str(mainEnemy.health) + " health.")
-#print(mainEnemy.name + " dealt " + str(mainEnemy.activeWeapon.damage) + " damage.")
-print("Player now has " + str(mainPlayer.health) + " health.")
+
 
 #print(battle()) 
