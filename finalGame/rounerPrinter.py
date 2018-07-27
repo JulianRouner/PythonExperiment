@@ -1,6 +1,8 @@
 from time import sleep
 import sys
 
+ROUNER_COLOUR="\033["
+
 NORMAL = "0"
 BOLD   = "1"
 FAINT  = "2"

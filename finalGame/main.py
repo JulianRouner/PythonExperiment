@@ -28,7 +28,8 @@ def walk(xCoord, yCoord):
     coordinates[2] = yCoord
 
 def chooseWeapons():
-    battleOption = input("Would you like to: \n a) Shoot a laser \n b) Raise your shield \n c) Shoot a gun \n") 
+    slowPrint("Would you like to: \n a) Shoot a laser \n b) Raise your shield \n c) Shoot a gun", 0.06)
+    battleOption = input("") 
     enemyBattleOption = randint(1, 3)
     
     if battleOption == "a":
@@ -52,16 +53,27 @@ def chooseWeapons():
         slowPrint("Enemy shot a gun.", 0.06)
         
 def battle(myPlayer, myEnemy):
-    slowPrint("You have encountered " + colorPrint(myEnemy.name, RED, BOLD) + ".", 0.06)
-    while (myPlayer.health > 0 or myEnemy.health > 0): #while one opponent alive
+    slowPrint("You have encountered \033[1;31m" + str(myEnemy.name)  + ".", 0.06)
+    print(RESET)
+    while (True): #while one opponent alive
         chooseWeapons()
-        if myPlayer.fightEnemy(myEnemy):
+        if myPlayer.fightEnemy(myEnemy) and not myEnemy.fightEnemy(myPlayer):
             myEnemy.health -= myPlayer.activeWeapon.damage
-        elif not myPlayer.fightEnemy(myEnemy):
+            slowPrint("\033[1;32mPlayer dealt " + str(mainPlayer.activeWeapon.damage) + " damage." + RESET, 0.06)
+            print(RESET)
+        elif not myPlayer.fightEnemy(myEnemy) and myEnemy.fightEnemy(myPlayer):
             myPlayer.health -= myEnemy.activeWeapon.damage
+            slowPrint("\033[1;31m" + mainEnemy.name + " dealt " + str(mainEnemy.activeWeapon.damage) + " damage." + RESET, 0.06)
         else:
-            slowPrint("You used the same weapon. No damage was dealt.", 0.06)
+            slowPrint("\033[1;33mYou used the same weapon. No damage was dealt." + RESET, 0.06)
             print("")
+        
+        if myPlayer.health <= 0:
+            slowPrint(colorPrint("The enemy has penetrated your armor. You must retreat now for your own survival.", RED, [BOLD]), 0.06)
+            break
+        elif myEnemy.health <= 0:
+            slowPrint(colorPrint("You have defeated the enemy.", GREEN, [BOLD]), 0.06)
+            break
         #print("Player dealt " + str(mainPlayer.activeWeapon.damage) + " damage.")
         slowPrint("Enemy now has " + str(myEnemy.health) + " health.", 0.06)
         #print(mainEnemy.name + " dealt " + str(mainEnemy.activeWeapon.damage) + " damage.")
